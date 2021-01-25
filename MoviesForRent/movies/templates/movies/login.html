@@ -1,0 +1,29 @@
+<html>
+    {% load static %}
+    <head>
+        <title>
+            Login
+        </title>
+        <link rel="stylesheet" href="{% static 'movies/style.css' %}">
+    </head>
+    <body id="loginBody">
+        <div class="loginContent">
+            <h1 style="text-align: center">Movies For Rent</h1>
+            <div class="login">
+                <h3 style="text-align: center">Login</h3>
+                <form action="/login/home" method="POST">
+                {% csrf_token %}
+                    <div class="inputWrapper">
+                        <input class="loginInput" type="text" name="username" placeholder="Username" required><br />
+                        <input class="loginInput" type="password" name="password" placeholder="Password" required><br />
+                        <input class="loginInput submit" type="submit" value="Login">
+                        {% if error %}
+                            <span class="error">Wrong Username or Password</span>
+                        {% endif %}
+                    </div>
+                </form>
+                <a href="/create-user" style="color: white;">Create Account</a>
+            </div>
+        </div>
+    </body>
+</html>

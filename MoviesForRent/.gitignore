@@ -1,0 +1,6 @@
+db.sqlite3
+*.pyc
+movies/migrations
+env/
+*v2.xlsx
+/static

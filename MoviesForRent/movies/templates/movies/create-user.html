@@ -1,0 +1,41 @@
+<html>
+    {% load static %}
+    <head>
+        <title>
+            Create User
+        </title>
+        <link rel="stylesheet" href="{% static 'movies/style.css' %}">
+        <script>
+            function validatePasswords(){
+                var password = document.getElementsByName('password')[0];
+                var confirmPassword = document.getElementsByName('confirm_password')[0];
+                if(password.value == confirmPassword.value){
+                    return true;
+                }
+                document.getElementsByClassName('error')[0].style.display = "block"
+                return false
+            }
+        </script>
+    </head>
+    <body id="loginBody">
+        <div class="loginContent">
+            <h1 style="text-align: center">Movies For Rent</h1>
+            <div class="login">
+                <h3 style="text-align: center">Create User</h3>
+                <form action="create-user/login" method="POST" onsubmit="return validatePasswords()">
+                {% csrf_token %}
+                    <div class="inputWrapper">
+                        <input class="loginInput" type="text" name="username" placeholder="Username" required><br />
+                        <input class="loginInput" type="text" name="first_name" placeholder="First Name" required><br />
+                        <input class="loginInput" type="text" name="last_name" placeholder="Last Name" required><br />
+                        <input class="loginInput" type="email" name="email" placeholder="Email Address" required><br />
+                        <input class="loginInput" type="password" name="password" placeholder="Password" required><br />
+                        <input class="loginInput" type="password" name="confirm_password" placeholder="Confirm Password" required><br />
+                        <input class="loginInput submit" type="submit" value="Create Account">
+                        <span class="error" style="display: none;">Passwords Do Not Match</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

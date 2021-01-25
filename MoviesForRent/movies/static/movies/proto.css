@@ -1,0 +1,149 @@
+@import "button.css"; 
+body {
+    background-color: #577399;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* .main {
+    margin: auto;
+    background-color: #e6e9f0;
+    height: 100%;
+} */
+.header {
+    height: 50px;
+    background: #495867;
+    padding: 12px;
+    color: #F7F7FF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.selectedMovie{
+    background: #a80000;
+    padding: 3px;
+}
+a {
+    color: white;
+}
+
+.movieOut {
+    color: black;
+    text-decoration: underline;
+}
+
+.home-content {
+    background-color: #577399;
+    height: 100%;
+    padding-top: 5px;
+}
+
+.content {
+    background-color: #577399;
+    height: 100%;
+    padding-top: 1%;
+}
+
+.movieView {
+    background-color: #F7F7FF;
+    width: 85%;
+    height: 55%;
+    margin: auto;
+    display: flex;
+}
+
+.movie {
+    padding: 15px; 
+    width: 100%;
+}
+
+.movieInfo {
+    border-top: solid;
+    border-top-width: 1px; 
+    border-top-color: #495867;
+    display: flex;
+    width: 100%; 
+    padding-top: 10px; 
+}
+
+#btn {
+    padding-left: 105px;
+    margin-bottom: 1%;
+}
+
+#movieListBtn {
+    padding: 10px;
+}
+
+.infoTitle {
+    margin-right: 5px; 
+    font-weight: bold; 
+}
+
+.infoItem {
+    margin-bottom: 5px; 
+    display: inline-block;
+}
+
+.movieList{
+    /* height: 75%; */
+    width: 95%;
+    background-color: rgba(66, 66, 97, 0);
+    /* margin-top: -5%; */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+}
+
+.movieItem {
+    margin: 25px; 
+    width: 15%;
+    /* height: 25% */
+}
+
+.movieListContainer {
+    width: 96%;
+    background-color: #F7F7FF;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px; 
+}
+
+.homeContentView{
+    width: 95%;
+    background-color: #4958677d;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 15px;
+}
+.homeItem{
+    margin: 15px;
+    border-radius: 3px;
+    flex-basis: 40%;
+    background-color: #e6e9f0;
+    box-shadow: 3px 3px 5px 5px #00000069;
+}
+.centered{
+    margin-left: auto;
+    margin-right: auto ;
+}
+.centerContent{
+    text-align: center;
+    margin: 3px;
+}
+.centerContent>*{
+    display: inline-block;
+}
+
+#emptyMovie{
+    margin: auto;
+}
+
+#movieListTitle{
+    text-align: center;
+}

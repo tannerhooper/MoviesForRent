@@ -1,0 +1,163 @@
+@import "button.css"; 
+a {
+    color: white;
+}
+li {
+    color: black;
+    text-decoration: underline;
+}
+p {
+    color: blue;
+    text-align: center;
+}
+body {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+h2{
+    text-align: center;
+}
+.header {
+ background-color:gray;
+
+}
+.notificationbar{
+background-color: orangered;
+display: flex;
+flex-direction: column;
+padding: 10;
+}
+
+.notification{
+        background-color: rgba(128, 128, 128, 0.199);
+        margin: 2px;
+}
+.content{
+    flex-grow: 3;
+    background-color: lightgray;
+    display: block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    height: 80%;
+}
+.section{
+    flex-basis: 40%;
+    background-color: rgba(128, 128, 128, 0.199);
+    margin: 2px;
+    height: 50%;
+
+    
+}
+.footer{
+background-color:gray;
+}
+.flexcontainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: stretch;
+    
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    
+}
+.flexitem{
+ background-color: white;
+ margin: 5px;
+}
+.flexstart{
+    order:-1;
+}
+.flexend{
+    order:100000;
+}
+.spacetaker{
+    margin-left: auto;
+    margin-right: auto
+}
+
+.login {
+    background-color: #495867;
+    width: 45%;
+    min-height: 20%;
+    margin: auto;
+    padding: 15px;
+}
+
+.profileMovieList {
+    background-color: #495867;
+    width: 45%;
+    min-height: 20%;
+    margin: auto;
+    padding: 15px;
+}
+
+.profileList {
+    display: flex;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+
+.loginInput {
+    display: block;
+    height: 30px;
+}
+.loginInputHidden
+{
+    height: 30px;
+    border: none;
+    background: none;
+    text-align: center;
+}
+
+#loginBody {
+    background-color: #577399;
+}
+
+.submit {
+    width: initial;
+    padding: 10px;
+    display: block;
+}
+
+.error {
+    color: red; 
+    text-align: center;
+    font-size: 20px;
+    display: block;
+}
+.editWrapper{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+.fieldWrapper{
+    display: flex;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.inputWrapper{
+    display: flex;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}

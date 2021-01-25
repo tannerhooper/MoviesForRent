@@ -1,0 +1,94 @@
+body {
+    background-color: #c2dde6;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* .main {
+    margin: auto;
+    background-color: #e6e9f0;
+    height: 100%;
+} */
+.header {
+    height: 50px;
+    background: #495867;
+    padding: 12px;
+    color: #F7F7FF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .logo {
+
+}
+
+.search {
+
+}
+
+.settings {
+
+} */
+
+.content {
+    background-color: #577399;
+    height: 100%;
+    padding-top: 10%;
+}
+
+.movieView {
+    background-color: #F7F7FF;
+    width: 85%;
+    height: 55%;
+    margin: auto;
+    display: flex;
+}
+
+.movie {
+    padding: 15px; 
+    width: 100%;
+}
+
+.movieInfo {
+    border-top: solid;
+    border-top-width: 1px; 
+    border-top-color: #495867;
+    display: flex;
+    width: 100%; 
+    padding-top: 10px; 
+}  
+
+.infoTitle {
+    margin-right: 5px; 
+    font-weight: bold; 
+}
+
+.infoItem {
+    margin-bottom: 5px; 
+    display: inline-block;
+}
+
+.movieList{
+    /* height: 75%; */
+    width: 95%;
+    background-color: #F7F7FF;
+    /* margin-top: -5%; */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movieItem {
+    margin: 25px; 
+    width: 15%;
+    /* height: 25% */
+}
+
+.movieListContainer {
+    width: 96%;
+    background-color: #F7F7FF;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px; 
+}

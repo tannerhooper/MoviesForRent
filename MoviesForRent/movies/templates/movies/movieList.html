@@ -1,0 +1,52 @@
+<html>
+{% load static %}
+
+    <head>
+        <title>
+            Movies
+        </title>
+
+        <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="logo">
+                <a href="/"><h2>Rent-A-Movie</h2></a>
+            </div>
+            <div class="settings">
+                <a href="/userDetail" style="color: white;">Profile</a>
+                <a href="/logout" style="color: white;">Logout</a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="movieListContainer">
+                <div class="movieList">
+                    {% for movie in movies %}
+                        <div class="movieItem">
+                            <p>
+                                <a href="{% url 'moviedetail' movie.id %}"><img src="{{movie.image}}" id="{{movie.id}}" style="width: 100%" alt="{{movie.title}}"></a>
+                                <p id="movieListTitle"> {{movie.title}} </p>
+                                <script>
+                                    var el = document.getElementById("{{movie.id}}")
+                                    if(el.getAttribute("src")==null || el.getAttribute("src")==""){
+                                        el.setAttribute("src", 'static/movies/no_image.jpg');
+                                    }
+                                </script>
+                                {% if not movie.available %}
+                                    <script>
+                                        document.getElementById("{{movie.id}}").style.filter = "grayscale(100%)";
+                                    </script>
+                                {% endif %}
+                            </p>
+                        </div>
+                    {% empty %}
+                        <div id="emptyMovie">
+                            <p>No Movies Available</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

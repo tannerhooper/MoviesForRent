@@ -1,0 +1,60 @@
+<html>
+        {% load static %}
+    <head>
+        <title>
+            Prototype #1
+        </title>
+
+        <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+    </head>
+
+    <body>
+            <div class="header">
+                <div class="logo">
+                    <a href="/"><h2>Rent-A-Movie</h2></a>
+                </div>
+                <div class="search">
+                    <input type="text" placeholder="Search">
+                </div>
+                <div class="settings">
+                    <span style="margin-right: 10px;">(1)Alerts</span>
+                    <a href="/logout" style="color: white;">Logout</a>
+                </div>
+            </div>
+            <div class="content">
+                <div class="movieView">
+                    <div class="image">
+                        <img src="{% static 'movies/star_wars.jpg' %}" style="height: 100%">
+                    </div>
+                    <div class="movie">
+                        <div>
+                            <span style="font-weight: bold"> Star Wars: Return of the Jedi</span>
+                            <div class="movieInfo">
+                                <div class="infoTitle">
+                                    <span class="infoItem">Owner:</span><br />
+                                    <span class="infoItem">Genre:</span><br />
+                                    <span class="infoItem">Length:</span><br />
+                                    <span class="infoItem">Rating:</span><br />
+                                    <span class="infoItem">Condition:</span><br />
+                                    <span class="infoItem">Availablity:</span><br /><br />
+                                    <span class="infoItem">Synopsis:</span><br />
+                                </div>
+                                <div class="infoValue">
+                                    <span class="infoItem">Username56238</span><br/>
+                                    <span class="infoItem">SciFi, Action, Adventure</span><br />
+                                    <span class="infoItem">131 mins</span><br />
+                                    <span class="infoItem">PG</span><br />
+                                    <span class="infoItem">Excellent</span><br />
+                                    <span class="infoItem">Available</span>
+                                    <p>After a daring mission to rescue Han Solo from Jabba the Hutt, the rebels dispatch to Endor to destroy a more powerful Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor's trap.</p>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                            <button>Borrow Movie</button><button>Contact Owner</button>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+{% load static %}
+
+<head>
+    <title>
+        Borrow
+    </title>
+    <link rel="stylesheet" href="{% static 'movies/style.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="/">
+                <a href="/"><h2>Rent-A-Movie</h2></a>
+            </a>
+        </div>
+        <div class="settings">
+            <a href="/userDetail" style="color: white;">Profile</a>
+            <a href="/logout" style="color: white;">Logout</a>
+        </div>
+    </div>
+    <div class='content'>
+        <div class="loginContent">
+            <h1 style="text-align: center">Movies For Rent</h1>
+            <div class="login">
+                <h2 style="text-align: center">Lend {{movie.title}}</h3>
+                    <h4 style="text-align: center">{{borrow.borrower}} would like to borrow this movie please choose your terms and accept or reject their request.</h3>
+                        <div style="display: flex;flex-direction: column;justify-content: center;background-color: aliceblue;border-radius: 5px;padding: 5px">
+                    <form action="{% url 'acceptBorrow' id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="inputWrapper" style="display: flex;flex-direction: column;justify-content: center;background-color: aliceblue;border-radius: 5px;padding :5px">
+                            <input style="text-align: center" type="text" placeholder="Terms" name="terms">
+                            <input style="text-align: center" type="text" placeholder="Message" name="message">
+                            <input style="text-align: center" class="loginInput submit" type="submit" value="Accept">
+                        </div>
+                    </form>
+                    <form action="{% url 'rejectBorrow' id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="inputWrapper" style="display: flex;flex-direction: column;justify-content: center;background-color: aliceblue;border-radius: 5px;padding: 5px">
+                            <input style="text-align: center" type="text" placeholder="Message" name="message">
+                            <input  style="text-align: center" class="loginInput submit" type="submit" value="Reject">
+                        </div>
+                    </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<meta charset="utf-8">
+    <title>Movie Detail</title>
+    <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+</head>
+<body>
+	<div class="header">
+        <div class="logo">
+            <a href="/"><h2>Rent-A-Movie</h2></a>
+        </div>
+        <div class="settings">
+            <a href="/userDetail" style="color: white;">Profile</a>
+            <a href="/logout" style="color: white;">Logout</a>
+        </div>
+    </div>
+
+	<div class="content">
+        <div id="btn">
+            <button id="movieListBtn" style="display: block" onclick="window.location.href='{% url 'movieList' %}'""><-- Movie List</button>
+        </div>
+		<div class="movieView">
+            
+			<div class="image">
+                        <img src={{movie.image}} style="height: 100%">
+                    </div>
+                    <div class="movie">
+                        <div>
+                            <span style="font-weight: bold">{{movie.title}}</span>
+                            <div class="movieInfo">
+                                <div class="infoTitle">
+                                    <span class="infoItem">Owner:</span><br />
+                                    <span class="infoItem">Genre:</span><br />
+                                    <span class="infoItem">Length:</span><br />
+                                    <span class="infoItem">Rating:</span><br />
+                                    <span class="infoItem">Condition:</span><br />
+                                    <span class="infoItem">Availability:</span><br/>
+                                    <span class="infoItem">Possesor:</span><br />
+                                    <span class="infoItem">Synopsis:</span><br />
+                                </div>
+                                <div class="infoValue">
+                                    <span class="infoItem">{{movie.owner}}</span><br />
+                                    <span class="infoItem">{{movie.genre}}</span><br />
+                                    <span class="infoItem">{{movie.length}}</span><br />
+                                    <span class="infoItem">{{movie.rating}}</span><br />
+                                    <span class="infoItem">{{movie.condition}}</span><br />
+                                    <span class="infoItem">
+                                        {% if movie.available %}
+                                            Available
+                                        {% else %}
+                                            Not Available
+                                        {% endif %}
+                                    </span><br>
+                                    <span class="infoItem">{{movie.possession}}</span><br>
+                                    <p>{{movie.synopsis}}</p>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                            {% if status %}
+                                <button type="submit" required disabled>{{action}} Movie</button>
+                            {% else %}
+                                {% if action == 'Borrow'%}
+                                    <form action="/sendBorrowRequest/{{movie.id}}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" required>{{action}} Movie</button>
+                                {% elif action == 'Return' %}
+                                    <form action="/returnMovie/{{movie.id}}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" required>{{action}} Movie</button>
+                                {% endif %}
+                            {% endif %}
+                            </form>
+                                {% if action == 'Borrow'%}
+                                    {% if status %}
+                                        <h2>Borrow Request successfully sent</h2>
+                                    {% elif status == False %}
+                                        <h2>Error. {{message}}</h2>
+                                    {% endif %}
+                                {% elif action == 'Return' %}
+                                    {% if status %}
+                                        <h2>{{movie.title}} successfully returned!</h2>
+                                    {% elif status == False %}
+                                        <h2>Error. {{message}}</h2>
+                                    {% endif %}
+                                {% endif %}
+                                
+                        </div>
+                    </div>
+		</div>
+			
+	</div>
+</body>
+</html>

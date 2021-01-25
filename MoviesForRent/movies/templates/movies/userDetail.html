@@ -1,0 +1,97 @@
+<html>
+    {% load static %}
+    <head>
+        <title>
+            Profile
+        </title>
+        <link rel="stylesheet" href="{% static 'movies/style.css' %}">
+        <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+        <script>
+            function toggle(button){
+
+                var form =button.parentNode.children[0];
+
+                if (form.className != "loginInput") {
+                    form.readOnly = false;
+                    form.className = "loginInput";
+                } else {
+                    form.className = "loginInputHidden";
+                    form.readOnly = true;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <div class="logo">
+                <a href="/"><h2>Rent-A-Movie</h2></a>
+            </div>
+            <div class="settings">
+                <a href="/userDetail" style="color: white;">Profile</a>
+                <a href="/logout" style="color: white;">Logout</a>
+            </div>
+        </div>
+        <div class='content'>
+            <div class='profileMovieList'>
+                <h3 style="text-align: center">Your Movies</h3>
+                <div class="profileList">
+                    <ul>
+                        {% for movie in userData.movies %}
+                            <a href="{% url 'moviedetail' movie.id %}"><li> {{ movie.title }} </li></a>
+                        {% empty %}
+                            <p>No movies posted yet</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <div class="login">
+                <h3 style="text-align: center">User Info</h3>
+                <form action="updateUser" method="POST" >
+                    {% csrf_token %}
+                    <div class="fieldWrapper">
+                        <div class="editWrapper">
+                        
+                        <input class="loginInputHidden" type="text" name="username" value="{{userData.user.username}}" required readOnly>
+                        <label class="loginInputHidden" style="font-size: 13; color: gray">Username</label>
+
+                        <!-- <input
+                            type="button"
+                            value="Edit Username"
+                            onclick="toggle(this)" disabled>
+                        </div><br/> -->
+                        
+                        <div class="editWrapper">
+                        <input class="loginInputHidden" type="email" name="email" value="{{userData.user.email}}" required readOnly><br />
+
+                        <input
+                            type="button"
+                            value="Edit Email"
+                            onclick="toggle(this)">
+                        </div><br/>
+                        
+                        <div class="editWrapper">
+                        <input class="loginInputHidden" type="text" name="first_name" value="{{userData.user.first_name}}" required readOnly><br />
+
+                        <input
+                            type="button"
+                            value="Edit First Name"
+                            onclick="toggle(this)">
+                        </div><br/>
+                        
+                        <div class="editWrapper">
+                        <input class="loginInputHidden" type="text" name="last_name" value="{{userData.user.last_name}}" required readOnly><br />
+
+                        <input
+                            type="button"
+                            value="Edit Last Name"
+                            onclick="toggle(this)"
+                            >
+                        </div><br/><br/>
+                        <input class="loginInput submit" type="submit" value="Update User Info">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>Post A Movie</title>
+    <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+    <script>
+        var item = [];
+        var genreDict = {
+
+            28: "Action",
+
+            12: "Adventure",
+
+            16: "Animation",
+
+            35: "Comedy",
+
+            80: "Crime",
+
+            99: "Documentary",
+
+            18: "Drama",
+
+            10751: "Family",
+
+            14: "Fantasy",
+
+            36: "History",
+
+            27: "Horror",
+
+            10402: "Music",
+
+            9648: "Mystery",
+
+            10749: "Romance",
+
+            878: "Science Fiction",
+
+            10770: "TV Movie",
+
+            53: "Thriller",
+
+            10752: "War",
+
+            37: "Western"
+
+        }
+
+        function getMovies() {
+            //phrase=document.getElementById(searchInput).value
+            var phrase = document.getElementById("searchInput").value;
+            return new Promise((resolve, reject) => {
+                fetch('https://api.themoviedb.org/3/search/movie?api_key=633b13af41578573e167d76d0d102ab0&language=en-US&query=' +
+                        phrase + '&include_adult=false')
+                    .then((response) => response.json())
+                    .then((response) => {
+                        items = [];
+                        response.results.forEach(element => {
+                            console.log(element)
+                            let genres = element.genre_ids.map(id => " " + genreDict[id]).join();
+                            items.push({
+                                title: element.title,
+                                id: element.id,
+                                image: element.poster_path,
+                                synopsis: element.overview,
+                                genre: genres
+                            });
+                        });
+                        resolve(items);
+                        console.log(items)
+
+                        var myNode = document.getElementById("searchResults");
+                        while (myNode.firstChild) {
+                            myNode.removeChild(myNode.firstChild);
+                        }
+                        var i;
+                        for (i = 0; i < items.length && i<20; i++) {
+                            createItem(items[i], i);
+                        }
+
+                        //document.getElementById("searchResults").innerHTML = "searchResults will appear here";
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        reject(error);
+                    });
+            });
+
+        }
+
+        function createItem(item, pos) {
+            if (item['image'] !== null) {
+                var title = document.createElement("p");
+                title.innerHTML = item['title'];
+                var movieItem = document.createElement("div");
+                movieItem.setAttribute("class", "movieItem");
+                var imagelink = document.createElement("div");
+                imagelink.setAttribute("onclick", "selectMovie(this)");
+                var image = document.createElement("img");
+                image.setAttribute("src", 'https://image.tmdb.org/t/p/w342' + item["image"]);
+                image.setAttribute("style", "width: 100%");
+                imagelink.appendChild(image);
+                imagelink.appendChild(title);
+                movieItem.appendChild(imagelink);
+                var id = document.createElement("input");
+                id.value = pos;
+                id.style.visibility = "hidden";
+                imagelink.appendChild(id);
+                //node.innerText=item['title'];
+                document.getElementById("searchResults").appendChild(movieItem);
+            }
+        }
+
+        function selectMovie(movie) {
+            //
+            if (document.getElementsByClassName("selectedMovie")[0]) {
+                document.getElementsByClassName("selectedMovie")[0].setAttribute("class", "");
+            }
+            movie.setAttribute("class", "selectedMovie");
+
+            console.log(items[movie.getElementsByTagName("input")[0].value]);
+            getMovieDetails(items[movie.getElementsByTagName("input")[0].value]["id"]);
+            document.getElementById("title").value = items[movie.getElementsByTagName("input")[0].value]["title"];
+            document.getElementById("image").value = 'https://image.tmdb.org/t/p/w342' + items[movie
+                .getElementsByTagName("input")[0].value]["image"];
+            document.getElementById("synopsis").value = items[movie.getElementsByTagName("input")[0].value]["synopsis"];
+            document.getElementById("genre").value = items[movie.getElementsByTagName("input")[0].value]["genre"];
+
+
+            document.getElementById("owner").value =
+                "user" //items[movie.getElementsByTagName("input")[0].value]["title"];
+            document.getElementById("possession").value =
+                "NO_ONE" //items[movie.getElementsByTagName("input")[0].value]["title"];
+
+            document.getElementById("available").value =
+                "True" //items[movie.getElementsByTagName("input")[0].value]["title"];
+            //document.getElementById("condition").value="user"//items[movie.getElementsByTagName("input")[0].value]["title"];
+            window.scrollTo(window.innerHeight)
+
+        }
+
+        function getMovieDetails(MovieId) {
+            return new Promise((resolve, reject) => {
+                fetch("https://api.themoviedb.org/3/movie/" + MovieId +
+                        "?api_key=633b13af41578573e167d76d0d102ab0&language=en-US&append_to_response=release_dates"
+                        )
+                    .then((response) => response.json())
+                    .then((response) => {
+
+                        console.log(response);
+                        var movie = response
+                        var rating = movie["release_dates"]["results"].find((result) => {
+                            if (result["iso_3166_1"] == "US") {
+                                return result;
+                            }
+                        })["release_dates"][0]["certification"];
+                        resolve(movie);
+                        console.log(movie);
+
+                        document.getElementById("length").value = movie
+                            .runtime //items[movie.getElementsByTagName("input")[0].value]["title"];
+                        document.getElementById("rating").value =
+                            rating //,items[movie.getElementsByTagName("input")[0].value]["title"];
+                        //document.getElementById("searchResults").innerHTML = "searchResults will appear here";
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        reject(error);
+                    });
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="/"><h2>Rent-A-Movie</h2></a>
+        </div>
+        <div class="settings">
+            <a href="/userDetail" style="color: white;">Profile</a>
+            <a href="/logout" style="color: white;">Logout</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="movieListContainer">
+             <div class="centerContent">
+                <h2>Please search and select a movie</g2>
+            </div>
+        <div class="centerContent">
+            After you have selected a movie it will appear red.
+        </div>
+        <div class="centerContent group">
+            <input style="width:300px" class="centerContent"id="searchInput" type="text" placeholder="the lego movie" />
+        </div>
+        <div class="centerContent">
+            <button onclick="getMovies()">Find my movie</button>
+        </div>
+        <div class="movieList" id="searchResults"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
+        <form action="{% url 'createMovie' %}" method="post" class="poster">
+                {%csrf_token %}
+                <div>
+                    <input type="text" name="title" id="title" style="display:none" required>
+                </div>
+                <div>
+                    <input type="text" name="genre" id="genre" style="display:none">
+                </div>
+                <div>
+                    <input type="text" name="length" id="length" style="display:none">
+                </div>
+                <div>
+                    <input type="text" name="rating" id="rating" style="display:none">
+                </div>
+                <div>
+                    <input type="text" name="owner" id="owner" value="{{ user }}" style="display:none" />
+                </div>
+                <div>
+                    <input type="text" name="possession" id="possession" style="display:none">
+                </div>
+                <div>
+                    <input type="text" name="available" id="available" style="display:none">
+                </div>
+                <div class="centerContent">
+                    <label for="condition">Please describe the condition of your version of this movie</label>
+                </div>
+                <div class="centerContent">
+                    <input type="text"  style="width:300px" name="condition" id="condition" class="centerContent"
+                        placeholder="No Scratches with clean case">
+                </div>
+                <div>
+                    <input type="text" name="image" id="image" style="display:none">
+                </div>
+                <div>
+                    <input type="text" name="synopsis" id="synopsis" style="display:none">
+                </div>
+                <div class="centerContent">
+                    <input style="margin: 0 auto" type="submit" value="Post movie" class="centerContent">
+                </div>
+            </form>
+        </div>
+        <p></p>
+    </div>
+</body>
+</html>

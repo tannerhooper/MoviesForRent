@@ -1,0 +1,46 @@
+<html>
+{% load static %}
+
+<head>
+    <title>
+        Borrow
+    </title>
+    <link rel="stylesheet" href="{% static 'movies/style.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="/">
+                <a href="/"><h2>Rent-A-Movie</h2></a>
+            </a>
+        </div>
+        <div class="settings">
+            <a href="/userDetail" style="color: white;">Profile</a>
+            <a href="/logout" style="color: white;">Logout</a>
+        </div>
+    </div>
+    <div class='content'>
+        <div class="loginContent">
+            <div style="display:flex;background-color: aliceblue;flex-direction: column;border-radius: 5px;padding: 10px;box-shadow:1px 1px 3px 3px #00000069; margin-left:1%;margin-right:1%">
+                {% if  accepted %}
+                    <h2 style="text-align: center">Request For {{movie.title}} Was Accepted!</h3>
+                {% else  %}
+                    <h4 style="text-align: center">Request For {{movie.title}} Was Rejected.</h4>
+                                        
+                {% endif %}
+
+
+                    
+                        <div style="margin: 0 auto" class="inputWrapper">
+
+                                <button style="margin: 0 auto" onclick="window.location.href='{% url 'home' %}'">Continue</button>
+                            </div>
+                        </div>
+            
+        </div>
+    </div>
+</body>
+
+</html>

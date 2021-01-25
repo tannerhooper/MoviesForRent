@@ -1,0 +1,48 @@
+<html>
+        {% load static %}
+    <head>
+        <title>Rent-A-Movie</title>
+
+        <link rel="stylesheet" href="{% static 'movies/proto.css' %}">
+    </head>
+    <body>
+        <div class="header">
+            <div class="logo">
+                <a href="/"><h2>Rent-A-Movie</h2></a>
+            </div>
+            <div class="settings">
+                <a href="/userDetail" style="color: white;">Profile</a>
+                <a href="/logout" style="color: white;">Logout</a>
+            </div>
+        </div>
+        <div class="home-content">
+            <h2 style="text-align: center">Welcome {{userData.user.first_name}}</h2>
+            <div class="homeContentView">
+                <div class="homeItem">
+                                <h3 style="text-align: center">Post A Movie</h3>
+                                <a href="{% url 'postMovieView' %}"><img src="{% static 'movies/create.svg' %}" style="width: 100%"></a>
+                </div>
+                <div class="homeItem">
+                        <h3 style="text-align: center">Search For Movies</h3>
+                        <a href="{% url 'movieList' %}"><img src="{% static 'movies/search.svg' %}" style="width: 100%"></a>
+                </div>
+                <div class="homeItem">       
+                        <h3 style="text-align: center">Lending</h3>
+                        <ul>
+                            {% for movie in userData.lent %}
+                            <a href="{% url 'moviedetail' movie.id %}"><li class="movieOut"> {{ movie.title }} </li></a>
+                            {% endfor %}
+                        </ul>            
+                </div>
+                <div class="homeItem">
+                        <h3 style="text-align: center">Borrowing</h3>
+                        <ul>
+                            {% for movie in userData.borrowed %}
+                            <a href="{% url 'moviedetail' movie.id %}"><li class="movieOut"> {{ movie.title }} </li></a>
+                            {% endfor %}
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
